@@ -1,4 +1,5 @@
 using System.Collections.ObjectModel;
+using System.Runtime.InteropServices;
 using OpenQA.Selenium;
 
 namespace SauceLabsAutomation
@@ -18,9 +19,11 @@ namespace SauceLabsAutomation
             return this.webDriver.FindElements(elements);
         }
 
+        protected virtual void StoreProduct(ref Product product) { }
+
         public abstract void VerifyPage();
 
-        public void Visit()
+        public virtual void Visit()
         {
             this.webDriver.Url = this.SITE_URL;
         }

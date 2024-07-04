@@ -51,8 +51,8 @@ public class TShirtPurchaseTest
         // tshirt.Click();
 
         // Verify the T-shirt details
-        // ProductPage productPage = new(driver);
-        // productPage.VerifyPage();
+        ProductPage productPage = new(driver, ref product);
+        productPage.VerifyPage();
         // Assert.IsTrue(driver.Url.Contains(itemId));
         // Assert.AreEqual(driver.FindElement(By.ClassName("inventory_details_name")).Text, itemName);
 
@@ -61,8 +61,8 @@ public class TShirtPurchaseTest
         // string item_price = driver.FindElement(By.ClassName("inventory_details_price")).Text;
 
         // Add T-shirt to Cart
-        // productPage.AddToCart();
-        // productPage.OpenCart();
+        productPage.AddToCart();
+        productPage.OpenCart();
         // IWebElement addToCart = driver.FindElement(By.ClassName("btn_inventory"));
         // IWebElement cart = driver.FindElement(By.Id("shopping_cart_container"));
         // // Assert.IsTrue(addToCart.Text == "Add to cart");

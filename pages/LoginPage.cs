@@ -9,6 +9,13 @@ namespace SauceLabsAutomation
         readonly By password = By.Id("password");
         readonly By loginButton = By.Id("login-button");
 
+        public void Login()
+        {
+            GetElement(userName).SendKeys("standard_user");
+            GetElement(password).SendKeys("secret_sauce");
+            GetElement(loginButton).Click();
+        }
+
         public override void VerifyPage()
         {
             Assert.AreEqual(SITE_URL, webDriver.Url);
@@ -17,13 +24,6 @@ namespace SauceLabsAutomation
             Assert.IsTrue(GetElement(userName).Displayed);
             Assert.IsTrue(GetElement(password).Displayed);
             Assert.IsTrue(GetElement(loginButton).Displayed);
-        }
-
-        public void Login()
-        {
-            GetElement(userName).SendKeys("standard_user");
-            GetElement(password).SendKeys("secret_sauce");
-            GetElement(loginButton).Click();
         }
     }
 }

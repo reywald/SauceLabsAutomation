@@ -14,23 +14,27 @@ namespace SauceLabsAutomation
         readonly By title = By.ClassName("title");
         readonly By inventory = By.ClassName("inventory_item");
         ReadOnlyCollection<IWebElement>? product_links;
-
-        private Product StoreProduct(IWebElement element) =>
-             new Product
-             {
-                 id = element.GetAttribute("id").Split("_")[1],
-                 name = element.Text
-             };
-
+        IWebElement? selectedProduct;
 
         public void SelectProduct(string itemName, ref Product product)
         {
             product_links = GetElements(By.PartialLinkText(itemName));
             Assert.IsTrue(product_links.Count > 0);
-            IWebElement tshirt = product_links[0];
-            product = StoreProduct(tshirt);
+            selectedProduct = product_links[0];
 
-            tshirt.Click();
+            // Store the product contents
+            StoreProduct(ref product);
+
+            selectedProduct.Click();
+        }
+
+        protected override void StoreProduct(ref Product product)
+        {
+            if (selectedProduct != null)
+            {
+                product.id = selectedProduct.GetAttribute("id").Split("_")[1];
+                product.name = selectedProduct.Text;
+            }
         }
 
         public override void VerifyPage()

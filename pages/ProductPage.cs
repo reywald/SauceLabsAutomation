@@ -5,11 +5,14 @@ namespace SauceLabsAutomation
     internal class ProductPage : BasePage
     {
 
-        public ProductPage(IWebDriver driver) : base(driver)
+        public ProductPage(IWebDriver driver, ref Product product) : base(driver)
         {
 
-            this.SITE_URL += "inventory-item.html?id=";
+            this.SITE_URL += $"inventory-item.html?id={product.id}";
+            this.product = product;
         }
+
+        Product product;
 
         readonly By itemName = By.ClassName("inventory_details_name");
         readonly By itemDescription = By.ClassName("inventory_details_desc");
@@ -21,8 +24,8 @@ namespace SauceLabsAutomation
         {
             GetElement(addToCart).Click();
             Assert.IsTrue(GetElement(cart).Text == "1");
-            // Assert.IsTrue(addToCart.Text == "Remove");
-
+            Assert.IsTrue(GetElement(addToCart).Text == "Remove");
+            StoreProduct(ref product);
         }
 
         public void OpenCart()
@@ -30,19 +33,26 @@ namespace SauceLabsAutomation
             GetElement(cart).Click();
         }
 
+        protected override void StoreProduct(ref Product product)
+        {
+            product.description = GetElement(itemDescription).Text;
+            product.price = GetElement(itemPrice).Text;
+        }
+
+
         public override void VerifyPage()
         {
-            Assert.IsTrue(this.webDriver.Url.Contains("1"));
+            Assert.IsTrue(this.webDriver.Url.Contains($"{product.id}"));
             Assert.AreEqual("Swag Labs", webDriver.Title);
 
             Assert.IsTrue(GetElement(itemName).Displayed);
-            Assert.AreEqual(GetElement(itemName).Text, "");
+            Assert.AreEqual(GetElement(itemName).Text, product.name);
 
             Assert.IsTrue(GetElement(itemDescription).Displayed);
-            Assert.AreEqual(GetElement(itemDescription).Text, "");
+            // Assert.AreEqual(GetElement(itemDescription).Text, product.description);
 
             Assert.IsTrue(GetElement(itemPrice).Displayed);
-            Assert.AreEqual(GetElement(itemPrice).Text, "");
+            // Assert.AreEqual(GetElement(itemPrice).Text, product.price);
 
             Assert.IsTrue(GetElement(addToCart).Displayed);
             Assert.AreEqual(GetElement(addToCart).Text, "Add to cart");
