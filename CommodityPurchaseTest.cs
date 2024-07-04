@@ -6,7 +6,7 @@ using OpenQA.Selenium.Chrome;
 [TestClass]
 public class TShirtPurchaseTest
 {
-    readonly static string SITE_URL = "https://www.saucedemo.com/";
+    // readonly static string SITE_URL = "https://www.saucedemo.com/";
     static ChromeDriver? driver;
 
     [ClassInitialize]
@@ -34,6 +34,10 @@ public class TShirtPurchaseTest
         loginPage.VerifyPage();
         loginPage.Login();
 
+        // // Select a T-Shirt
+        ProductsPage productsPage = new ProductsPage(driver);
+        productsPage.VerifyPage();
+        productsPage.SelectProduct("T-Shirt");
         // Assert.AreEqual("Products", driver.FindElement(By.ClassName("title")).Text);
         // Assert.IsTrue(driver.Url.Contains("inventory.html"));
 

@@ -1,3 +1,4 @@
+using System.Collections.ObjectModel;
 using OpenQA.Selenium;
 
 namespace SauceLabsAutomation
@@ -10,6 +11,11 @@ namespace SauceLabsAutomation
         protected IWebElement GetElement(By element)
         {
             return this.webDriver.FindElement(element);
+        }
+
+        protected ReadOnlyCollection<IWebElement> GetElements(By elements)
+        {
+            return this.webDriver.FindElements(elements);
         }
 
         public abstract void VerifyPage();
