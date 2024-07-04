@@ -29,19 +29,20 @@ public class TShirtPurchaseTest
     public void Purchase()
     {
         ChromeDriver driver = GetDriver();
-        LoginPage loginPage = new LoginPage(driver);
+        Product product = new Product();
+
+        LoginPage loginPage = new(driver);
         loginPage.Visit();
         loginPage.VerifyPage();
         loginPage.Login();
 
-        // // Select a T-Shirt
-        ProductsPage productsPage = new ProductsPage(driver);
-        productsPage.VerifyPage();
-        productsPage.SelectProduct("T-Shirt");
         // Assert.AreEqual("Products", driver.FindElement(By.ClassName("title")).Text);
         // Assert.IsTrue(driver.Url.Contains("inventory.html"));
 
-        // // Select a T-Shirt
+        // Select a T-Shirt
+        ProductsPage productsPage = new(driver);
+        productsPage.VerifyPage();
+        productsPage.SelectProduct("T-Shirt", ref product);
         // ReadOnlyCollection<IWebElement> products = driver.FindElements(By.PartialLinkText("T-Shirt"));
         // Assert.IsTrue(products.Count == 2);
         // IWebElement tshirt = products[0];
@@ -49,7 +50,9 @@ public class TShirtPurchaseTest
         // string itemName = tshirt.Text;
         // tshirt.Click();
 
-        // // Verify the T-shirt details
+        // Verify the T-shirt details
+        // ProductPage productPage = new(driver);
+        // productPage.VerifyPage();
         // Assert.IsTrue(driver.Url.Contains(itemId));
         // Assert.AreEqual(driver.FindElement(By.ClassName("inventory_details_name")).Text, itemName);
 
@@ -57,7 +60,9 @@ public class TShirtPurchaseTest
         // string item_description = driver.FindElement(By.ClassName("inventory_details_desc")).Text;
         // string item_price = driver.FindElement(By.ClassName("inventory_details_price")).Text;
 
-        // // Add T-shirt to Cart
+        // Add T-shirt to Cart
+        // productPage.AddToCart();
+        // productPage.OpenCart();
         // IWebElement addToCart = driver.FindElement(By.ClassName("btn_inventory"));
         // IWebElement cart = driver.FindElement(By.Id("shopping_cart_container"));
         // // Assert.IsTrue(addToCart.Text == "Add to cart");
