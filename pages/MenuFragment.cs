@@ -2,7 +2,7 @@ using OpenQA.Selenium;
 
 namespace SauceLabsAutomation
 {
-    public class MenuFragment(IWebDriver driver)
+    internal class MenuFragment(IWebDriver driver)
     {
 
         readonly By menuButton = By.Id("react-burger-menu-btn");

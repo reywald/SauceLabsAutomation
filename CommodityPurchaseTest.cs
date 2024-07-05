@@ -78,9 +78,8 @@ public class TShirtPurchaseTest
         MenuFragment menu = new(driver);
         menu.Logout();
 
-        // // Verify Login Page
-        // Assert.AreEqual(SITE_URL, driver.Url);
-        // Assert.AreEqual("Swag Labs", driver.Title);
+        // Verify Login Page
+        loginPage.VerifyPage();
     }
 
     private static ChromeDriver GetDriver()
