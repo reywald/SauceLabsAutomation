@@ -74,11 +74,9 @@ public class TShirtPurchaseTest
         completionPage.VerifyPage();
         completionPage.Close();
 
-        // // Logout
-        // driver.FindElement(By.Id("back-to-products")).Click();
-        // driver.FindElement(By.Id("react-burger-menu-btn")).Click();
-        // Thread.Sleep(1000);
-        // driver.FindElement(By.Id("logout_sidebar_link")).Click();
+        // Logout
+        MenuFragment menu = new(driver);
+        menu.Logout();
 
         // // Verify Login Page
         // Assert.AreEqual(SITE_URL, driver.Url);
