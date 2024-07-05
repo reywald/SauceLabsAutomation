@@ -5,35 +5,39 @@ namespace SauceLabsAutomation
 {
     internal class ProductsPage : BasePage
     {
-        public ProductsPage(IWebDriver driver) : base(driver)
+        public ProductsPage(IWebDriver driver, Product product) : base(driver)
         {
 
+            this.product = product;
             this.SITE_URL += "inventory.html";
         }
+
+        Product product;
 
         readonly By title = By.ClassName("title");
         readonly By inventory = By.ClassName("inventory_item");
         ReadOnlyCollection<IWebElement>? product_links;
         IWebElement? selectedProduct;
 
-        public void SelectProduct(string itemName, ref Product product)
+        public void SelectProduct(string itemName)
         {
             product_links = GetElements(By.PartialLinkText(itemName));
             Assert.IsTrue(product_links.Count > 0);
             selectedProduct = product_links[0];
 
             // Store the product contents
-            StoreProduct(ref product);
+            StoreProduct();
 
             selectedProduct.Click();
         }
 
-        protected override void StoreProduct(ref Product product)
+        protected override void StoreProduct()
         {
             if (selectedProduct != null)
             {
                 product.id = selectedProduct.GetAttribute("id").Split("_")[1];
                 product.name = selectedProduct.Text;
+                Console.WriteLine($"In ProductsPage: {product}");
             }
         }
 

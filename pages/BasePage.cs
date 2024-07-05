@@ -19,7 +19,7 @@ namespace SauceLabsAutomation
             return this.webDriver.FindElements(elements);
         }
 
-        protected virtual void StoreProduct(ref Product product) { }
+        protected virtual void StoreProduct() { }
 
         public abstract void VerifyPage();
 

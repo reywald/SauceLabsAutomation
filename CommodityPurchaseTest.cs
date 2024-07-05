@@ -40,39 +40,26 @@ public class TShirtPurchaseTest
         // Assert.IsTrue(driver.Url.Contains("inventory.html"));
 
         // Select a T-Shirt
-        ProductsPage productsPage = new(driver);
+        ProductsPage productsPage = new(driver, product);
         productsPage.VerifyPage();
-        productsPage.SelectProduct("T-Shirt", ref product);
-        // ReadOnlyCollection<IWebElement> products = driver.FindElements(By.PartialLinkText("T-Shirt"));
-        // Assert.IsTrue(products.Count == 2);
-        // IWebElement tshirt = products[0];
-        // string itemId = tshirt.GetAttribute("id").Split("_")[1];
-        // string itemName = tshirt.Text;
-        // tshirt.Click();
+        productsPage.SelectProduct("T-Shirt");
+        Console.WriteLine(product);
 
         // Verify the T-shirt details
-        ProductPage productPage = new(driver, ref product);
+        ProductPage productPage = new(driver, product);
+        Console.WriteLine(product);
         productPage.VerifyPage();
-        // Assert.IsTrue(driver.Url.Contains(itemId));
-        // Assert.AreEqual(driver.FindElement(By.ClassName("inventory_details_name")).Text, itemName);
-
-        // string item_name = driver.FindElement(By.ClassName("inventory_details_name")).Text;
-        // string item_description = driver.FindElement(By.ClassName("inventory_details_desc")).Text;
-        // string item_price = driver.FindElement(By.ClassName("inventory_details_price")).Text;
 
         // Add T-shirt to Cart
         productPage.AddToCart();
         productPage.OpenCart();
-        // IWebElement addToCart = driver.FindElement(By.ClassName("btn_inventory"));
-        // IWebElement cart = driver.FindElement(By.Id("shopping_cart_container"));
-        // // Assert.IsTrue(addToCart.Text == "Add to cart");
-        // Assert.IsTrue(cart.Text.Length == 0);
 
-        // addToCart.Click();
-        // // Assert.IsTrue(addToCart.Text == "Remove");
-        // Assert.IsTrue(cart.Text == "1");
+        Console.WriteLine(product);
 
-        // // Navigate to cart
+        // Navigate to cart
+        CartPage cartPage = new(driver, product);
+        cartPage.VerifyPage();
+        cartPage.Checkout();
         // cart.Click();
         // Assert.IsTrue(driver.Url.Contains("cart.html"));
         // Assert.IsTrue(driver.FindElement(By.ClassName("title")).Text.Contains("Your Cart"));
