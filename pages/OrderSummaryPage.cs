@@ -56,7 +56,7 @@ namespace SauceLabsAutomation
             VerifyCost();
 
             Assert.IsTrue(GetElement(finishButton).Displayed);
-            // Assert.IsTrue(GetElement(cart).Text.Length == 0);
+            Assert.AreEqual(GetElement(finishButton).Text, "Finish");
         }
 
         private void VerifyCost()

@@ -36,7 +36,6 @@ namespace SauceLabsAutomation
             {
                 product.id = selectedProduct.GetAttribute("id").Split("_")[1];
                 product.name = selectedProduct.Text;
-                Console.WriteLine($"In ProductsPage: {product}");
             }
         }
 
@@ -45,6 +44,7 @@ namespace SauceLabsAutomation
             Assert.AreEqual(SITE_URL, webDriver.Url);
             Assert.AreEqual("Swag Labs", webDriver.Title);
             Assert.IsTrue(GetElement(title).Displayed);
+            Assert.AreEqual(GetElement(title).Text, "Products");
             Assert.IsTrue(GetElements(inventory).Count == 6);
         }
     }

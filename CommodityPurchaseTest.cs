@@ -36,25 +36,18 @@ public class TShirtPurchaseTest
         loginPage.VerifyPage();
         loginPage.Login();
 
-        // Assert.AreEqual("Products", driver.FindElement(By.ClassName("title")).Text);
-        // Assert.IsTrue(driver.Url.Contains("inventory.html"));
-
         // Select a T-Shirt
         ProductsPage productsPage = new(driver, product);
         productsPage.VerifyPage();
         productsPage.SelectProduct("T-Shirt");
-        Console.WriteLine(product);
 
         // Verify the T-shirt details
         ProductPage productPage = new(driver, product);
-        Console.WriteLine(product);
         productPage.VerifyPage();
 
         // Add T-shirt to Cart
         productPage.AddToCart();
         productPage.OpenCart();
-
-        Console.WriteLine(product);
 
         // Navigate to cart, review and checkout
         CartPage cartPage = new(driver, product);
@@ -76,11 +69,10 @@ public class TShirtPurchaseTest
         // Finalize Purchase
         orderSummaryPage.Finish();
 
-        // // Verify Order Summary page
-        // Assert.IsTrue(driver.Url.Contains("checkout-complete.html"));
-        // Assert.IsTrue(driver.FindElement(By.ClassName("title")).Text.Contains("Checkout: Complete!"));
-        // Assert.AreEqual(driver.FindElement(By.ClassName("complete-header")).Text, "Thank you for your order!");
-        // Assert.IsTrue(driver.FindElement(By.ClassName("complete-text")).Text.Contains("Your order has been dispatched"));
+        // Verify Order Completion page
+        OrderCompletionPage completionPage = new(driver);
+        completionPage.VerifyPage();
+        completionPage.Close();
 
         // // Logout
         // driver.FindElement(By.Id("back-to-products")).Click();
