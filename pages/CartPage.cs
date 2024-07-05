@@ -7,7 +7,6 @@ namespace SauceLabsAutomation
 
         public CartPage(IWebDriver driver, Product product) : base(driver)
         {
-
             this.product = product;
             this.SITE_URL += "cart.html";
         }

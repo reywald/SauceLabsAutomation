@@ -7,7 +7,6 @@ namespace SauceLabsAutomation
 
         public ProductPage(IWebDriver driver, Product product) : base(driver)
         {
-
             this.product = product;
             this.SITE_URL += $"inventory-item.html?id={product.id}";
         }

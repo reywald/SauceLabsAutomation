@@ -56,40 +56,20 @@ public class TShirtPurchaseTest
 
         Console.WriteLine(product);
 
-        // Navigate to cart
+        // Navigate to cart, review and checkout
         CartPage cartPage = new(driver, product);
         cartPage.VerifyPage();
         cartPage.Checkout();
-        // cart.Click();
-        // Assert.IsTrue(driver.Url.Contains("cart.html"));
-        // Assert.IsTrue(driver.FindElement(By.ClassName("title")).Text.Contains("Your Cart"));
 
-        // string cart_qty = driver.FindElement(By.ClassName("cart_quantity")).Text;
-        // string cart_name = driver.FindElement(By.ClassName("inventory_item_name")).Text;
-        // string cart_description = driver.FindElement(By.ClassName("inventory_item_desc")).Text;
-        // string cart_price = driver.FindElement(By.ClassName("inventory_item_price")).Text;
+        // Verify checkout
+        CheckoutPage checkoutPage = new(driver);
+        checkoutPage.VerifyPage();
 
-        // // Review cart details
-        // Assert.AreEqual(cart_name, item_name);
-        // Assert.AreEqual(cart_description, item_description);
-        // Assert.AreEqual(cart_price, item_price);
-        // Assert.AreEqual(cart_qty, "1");
+        // Enter Required checkout information and continue
+        checkoutPage.fillForm("Ikechukwu", "Agbarakwe", "112102");
+        checkoutPage.Continue();
 
-        // // Checkout and verify
-        // driver.FindElement(By.Id("checkout")).Click();
-        // Assert.IsTrue(driver.Url.Contains("checkout-step-one.html"));
-        // Assert.IsTrue(driver.FindElement(By.ClassName("title")).Text.Contains("Checkout: Your Information"));
-
-        // // Enter Required checkout information
-        // driver.FindElement(By.Id("first-name")).Clear();
-        // driver.FindElement(By.Id("first-name")).SendKeys("Ikechukwu");
-        // driver.FindElement(By.Id("last-name")).Clear();
-        // driver.FindElement(By.Id("last-name")).SendKeys("Agbarakwe");
-        // driver.FindElement(By.Id("postal-code")).Clear();
-        // driver.FindElement(By.Id("postal-code")).SendKeys("112102");
-        // driver.FindElement(By.Id("continue")).Click();
-
-        // // Verify Order Summary page
+        // Verify Order Summary page
         // Assert.IsTrue(driver.Url.Contains("checkout-step-two.html"));
         // Assert.IsTrue(driver.FindElement(By.ClassName("title")).Text.Contains("Checkout: Overview"));
 
