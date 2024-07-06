@@ -16,8 +16,8 @@ public sealed class ConfigFactory
         return (URLConfig)ConfigurationManager.GetSection("URLs");
     }
 
-    public static ShippingConfig GetShippingConfig()
+    public static ShippingAddresses GetShippingConfig()
     {
-        return (ShippingConfig)ConfigurationManager.GetSection("ShippingInfo");
+        return (ShippingAddresses)ConfigurationManager.GetSection("ShippingAddresses");
     }
 }

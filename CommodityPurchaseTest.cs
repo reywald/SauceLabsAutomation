@@ -27,7 +27,7 @@ public class TShirtPurchaseTest
     public void Purchase()
     {
         ChromeDriver driver = GetDriver();
-        Product product = new Product();
+        Product product = new();
 
         LoginPage loginPage = new(driver);
         loginPage.Visit();
@@ -58,7 +58,7 @@ public class TShirtPurchaseTest
         checkoutPage.VerifyPage();
 
         // Enter Required checkout information and continue
-        checkoutPage.fillForm("Ikechukwu", "Agbarakwe", "112102");
+        checkoutPage.FillForm();
         checkoutPage.Continue();
 
         // Verify Order Summary page and review checkout details

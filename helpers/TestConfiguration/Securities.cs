@@ -7,7 +7,7 @@ public class Security : ConfigurationSection
     [ConfigurationProperty("Credential")]
     public Credential Credential
     {
-        get => (Credential)this[nameof(Credential)];
-        set => value = (Credential)this[nameof(Credential)];
+        get => (Credential)this["Credential"];
+        set => value = (Credential)this["Credential"];
     }
 }

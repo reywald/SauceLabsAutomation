@@ -1,4 +1,5 @@
 using OpenQA.Selenium;
+using SauceLabsAutomation.TestConfiguration;
 
 namespace SauceLabsAutomation
 {
@@ -17,14 +18,19 @@ namespace SauceLabsAutomation
         readonly By lastName = By.Id("last-name");
         readonly By postalCode = By.Id("postal-code");
         readonly By continueButton = By.Id("continue");
+        readonly ShippingAddresses shippingAddresses = ConfigFactory.GetShippingConfig();
 
         public void Continue()
         {
             GetElement(continueButton).Click();
         }
 
-        public void fillForm(string fname, string lname, string pcode)
+        public void FillForm()
         {
+            string fname = shippingAddresses.Shipping.FirstName;
+            string lname = shippingAddresses.Shipping.LastName;
+            string pcode = shippingAddresses.Shipping.PostalCode;
+
             GetElement(firstName).SendKeys(fname);
             GetElement(lastName).SendKeys(lname);
             GetElement(postalCode).SendKeys(pcode);
