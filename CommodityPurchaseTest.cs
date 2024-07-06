@@ -1,9 +1,7 @@
 namespace SauceLabsAutomation;
 
 using System.Threading;
-using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using SauceLabsAutomation.TestConfiguration;
 
 [TestClass]
 public class TShirtPurchaseTest
@@ -35,7 +33,7 @@ public class TShirtPurchaseTest
         loginPage.Visit();
         loginPage.VerifyPage();
         loginPage.Login();
-        CheckLoggedIn(driver);
+        loginPage.CheckLoggedIn();
 
         // Select a T-Shirt
         ProductsPage productsPage = new(driver, product);
@@ -86,16 +84,5 @@ public class TShirtPurchaseTest
     private static ChromeDriver GetDriver()
     {
         return driver ?? throw new NullReferenceException("Driver has not been initialized");
-    }
-
-    private static void CheckLoggedIn(IWebDriver driver)
-    {
-        var securityConfig = ConfigFactory.GetSecurityConfig();
-
-        string username = securityConfig.Credential.Username;
-        string cookieUser = securityConfig.Credential.Cookie;
-
-        Cookie sessionCookie = driver.Manage().Cookies.GetCookieNamed(cookieUser);
-        Assert.AreEqual(sessionCookie.Value, username);
     }
 }
