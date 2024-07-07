@@ -11,9 +11,9 @@ public sealed class ConfigFactory
         return (Security)ConfigurationManager.GetSection("Security");
     }
 
-    public static URLConfig GetURLConfig()
+    public static URLS GetURLConfig()
     {
-        return (URLConfig)ConfigurationManager.GetSection("URLs");
+        return (URLS)ConfigurationManager.GetSection("URLs");
     }
 
     public static ShippingAddresses GetShippingConfig()
