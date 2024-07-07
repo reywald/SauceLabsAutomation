@@ -8,10 +8,10 @@ namespace SauceLabsAutomation
         public OrderSummaryPage(IWebDriver driver, Product product) : base(driver)
         {
             this.product = product;
-            this.SITE_URL += "checkout-step-two.html";
+            this.pageURL = base.pageURL + GetURL().Checkout2;
         }
 
-        Product product;
+        readonly Product product;
 
         readonly By title = By.ClassName("title");
         readonly By checkoutQty = By.ClassName("cart_quantity");
@@ -30,7 +30,7 @@ namespace SauceLabsAutomation
 
         public override void VerifyPage()
         {
-            Assert.AreEqual(SITE_URL, webDriver.Url);
+            Assert.AreEqual(pageURL, webDriver.Url);
             Assert.AreEqual("Swag Labs", webDriver.Title);
             Assert.IsTrue(GetElement(title).Displayed);
             Assert.AreEqual(GetElement(title).Text, "Checkout: Overview");

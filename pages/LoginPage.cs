@@ -26,13 +26,13 @@ namespace SauceLabsAutomation
             string username = security.Credential.Username;
             string cookieUser = security.Credential.Cookie;
 
-            Cookie sessionCookie = driver.Manage().Cookies.GetCookieNamed(cookieUser);
+            Cookie sessionCookie = webDriver.Manage().Cookies.GetCookieNamed(cookieUser);
             Assert.AreEqual(sessionCookie.Value, username);
         }
 
         public override void VerifyPage()
         {
-            Assert.AreEqual(SITE_URL, webDriver.Url);
+            Assert.AreEqual(pageURL, webDriver.Url);
             Assert.AreEqual("Swag Labs", webDriver.Title);
             Assert.IsTrue(GetElement(logo).Displayed);
             Assert.IsTrue(GetElement(userName).Displayed);

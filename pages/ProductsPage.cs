@@ -1,5 +1,6 @@
 using System.Collections.ObjectModel;
 using OpenQA.Selenium;
+using SauceLabsAutomation.TestConfiguration;
 
 namespace SauceLabsAutomation
 {
@@ -8,10 +9,10 @@ namespace SauceLabsAutomation
         public ProductsPage(IWebDriver driver, Product product) : base(driver)
         {
             this.product = product;
-            this.SITE_URL += "inventory.html";
+            this.pageURL = base.pageURL + GetURL().Products;
         }
 
-        Product product;
+        readonly Product product;
 
         readonly By title = By.ClassName("title");
         readonly By inventory = By.ClassName("inventory_item");
@@ -41,7 +42,7 @@ namespace SauceLabsAutomation
 
         public override void VerifyPage()
         {
-            Assert.AreEqual(SITE_URL, webDriver.Url);
+            Assert.AreEqual(pageURL, webDriver.Url);
             Assert.AreEqual("Swag Labs", webDriver.Title);
             Assert.IsTrue(GetElement(title).Displayed);
             Assert.AreEqual(GetElement(title).Text, "Products");
