@@ -1,32 +1,30 @@
 namespace SauceLabsAutomation;
 
 using System.Threading;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using SauceLabsAutomation.Factory;
 
 [TestClass]
 public class TShirtPurchaseTest
 {
-    static ChromeDriver? driver;
+    private static IWebDriver? driver;
 
     [ClassInitialize]
-    public static void SetUp(TestContext testContext)
-    {
-        ChromeOptions options = new ChromeOptions();
-        options.AddArguments("--incognito", "--start-maximized");
-        driver = new ChromeDriver(options);
-    }
+    public static void SetUp(TestContext testContext) => BrowserFactory.Init("Edge");
+
 
     [ClassCleanup]
     public static void TearDown()
     {
         Thread.Sleep(2000);
-        driver?.Quit();
+        BrowserFactory.CloseBrowser();
     }
 
     [TestMethod]
     public void Purchase()
     {
-        ChromeDriver driver = GetDriver();
+        driver = BrowserFactory.WebDriver;
         Product product = new();
 
         LoginPage loginPage = new(driver);
@@ -79,10 +77,5 @@ public class TShirtPurchaseTest
 
         // Verify Login Page
         loginPage.VerifyPage();
-    }
-
-    private static ChromeDriver GetDriver()
-    {
-        return driver ?? throw new NullReferenceException("Driver has not been initialized");
     }
 }
